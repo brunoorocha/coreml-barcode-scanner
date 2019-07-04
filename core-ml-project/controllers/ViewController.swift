@@ -18,11 +18,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startLiveVideo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        startLiveVideo()
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         startBarcodeDetection()
+        session.startRunning()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        session.stopRunning()
     }
     
     override func viewDidLayoutSubviews() {
@@ -32,8 +39,8 @@ class ViewController: UIViewController {
     func startLiveVideo() {
         session.sessionPreset = AVCaptureSession.Preset.high
         
-        let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
-        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
+        guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else { return }
+        guard let deviceInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
         let deviceOutput = AVCaptureVideoDataOutput()
         deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
         deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
@@ -67,9 +74,13 @@ class ViewController: UIViewController {
         }
         
         DispatchQueue.main.async {
+            if !self.session.isRunning { return }
             guard let results = request.results as? [VNBarcodeObservation] else { return }
-            for result in results {
+            if let result = results.first {
                 print(result.payloadStringValue ?? "")
+                if let code = result.payloadStringValue {
+                    self.performSegue(withIdentifier: "ProductDetails", sender: code)
+                }
             }
         }
     }
@@ -151,3 +162,13 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
     }
 }
 
+extension ViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ProductDetails" {
+            if let nextViewController = segue.destination as? ProductDetailsViewController {
+                guard let code = sender as? String else { return }
+                nextViewController.barcode = code
+            }
+        }
+    }
+}

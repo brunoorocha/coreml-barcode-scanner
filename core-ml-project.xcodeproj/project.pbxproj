@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BE61CEB22CE1DF8009A6863 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE61CEA22CE1DF8009A6863 /* ProductDetailsViewController.swift */; };
+		1BE61CEE22CE1F79009A6863 /* UIImage+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BE61CED22CE1F79009A6863 /* UIImage+Download.swift */; };
 		A3ED0D1C22CB9AF500A7F641 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ED0D1B22CB9AF500A7F641 /* AppDelegate.swift */; };
 		A3ED0D1E22CB9AF500A7F641 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ED0D1D22CB9AF500A7F641 /* ViewController.swift */; };
 		A3ED0D2122CB9AF500A7F641 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3ED0D1F22CB9AF500A7F641 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1BE61CEA22CE1DF8009A6863 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		1BE61CED22CE1F79009A6863 /* UIImage+Download.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Download.swift"; sourceTree = "<group>"; };
 		A3ED0D1822CB9AF500A7F641 /* core-ml-project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "core-ml-project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3ED0D1B22CB9AF500A7F641 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3ED0D1D22CB9AF500A7F641 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +39,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BE61CEC22CE1F67009A6863 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				1BE61CED22CE1F79009A6863 /* UIImage+Download.swift */,
+			);
+			path = helper;
+			sourceTree = "<group>";
+		};
 		A3C4936B22CE1B9700544AD3 /* service */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +80,7 @@
 		A3ED0D1A22CB9AF500A7F641 /* core-ml-project */ = {
 			isa = PBXGroup;
 			children = (
+				1BE61CEC22CE1F67009A6863 /* helper */,
 				A3C4936C22CE1BA600544AD3 /* models */,
 				A3C4936B22CE1B9700544AD3 /* service */,
 				A3ED0D2F22CB9B2500A7F641 /* views */,
@@ -90,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				A3ED0D1D22CB9AF500A7F641 /* ViewController.swift */,
+				1BE61CEA22CE1DF8009A6863 /* ProductDetailsViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -183,6 +197,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BE61CEB22CE1DF8009A6863 /* ProductDetailsViewController.swift in Sources */,
+				1BE61CEE22CE1F79009A6863 /* UIImage+Download.swift in Sources */,
 				A3ED0D1E22CB9AF500A7F641 /* ViewController.swift in Sources */,
 				A3ED0D1C22CB9AF500A7F641 /* AppDelegate.swift in Sources */,
 			);
@@ -331,7 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MK2CL4Y92D;
+				DEVELOPMENT_TEAM = 8UG5N7U4RW;
 				INFOPLIST_FILE = "core-ml-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -349,7 +365,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = MK2CL4Y92D;
+				DEVELOPMENT_TEAM = 8UG5N7U4RW;
 				INFOPLIST_FILE = "core-ml-project/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
