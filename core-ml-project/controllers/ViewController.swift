@@ -15,10 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     var requests: [VNRequest] = []
     let session = AVCaptureSession()
+    var device : AVCaptureDevice!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         startLiveVideo()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.flashAction))
+        self.view.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +44,7 @@ class ViewController: UIViewController {
         
         guard let captureDevice = AVCaptureDevice.default(for: AVMediaType.video) else { return }
         guard let deviceInput = try? AVCaptureDeviceInput(device: captureDevice) else { return }
+        self.device = captureDevice
         let deviceOutput = AVCaptureVideoDataOutput()
         deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
         deviceOutput.setSampleBufferDelegate(self, queue: DispatchQueue.global(qos: DispatchQoS.QoSClass.default))
@@ -53,6 +57,50 @@ class ViewController: UIViewController {
         imageView.layer.addSublayer(imageLayer)
         
         session.startRunning()
+    }
+    
+    @objc func flashAction(){
+        if (device.hasTorch)
+        {
+            self.session.beginConfiguration()
+            if device.isTorchActive == false {
+                self.flashOn()
+            } else {
+                self.flashOff();
+            }
+            self.session.commitConfiguration()
+        }
+    }
+    
+    private func flashOn()
+    {
+        do{
+            if (device.hasTorch)
+            {
+                try device.lockForConfiguration()
+                device.torchMode = .on
+                device.flashMode = .on
+                device.unlockForConfiguration()
+            }
+        }catch{
+            //DISABEL FLASH BUTTON HERE IF ERROR
+            print("Device tourch Flash Error ");
+        }
+    }
+    
+    private func flashOff()
+    {
+        do{
+            if (device.hasTorch){
+                try device.lockForConfiguration()
+                device.torchMode = .off
+                device.flashMode = .off
+                device.unlockForConfiguration()
+            }
+        }catch{
+            //DISABEL FLASH BUTTON HERE IF ERROR
+            print("Device tourch Flash Error ");
+        }
     }
     
     func startTextDetection() {
